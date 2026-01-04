@@ -1,10 +1,12 @@
 import React from 'react'
 import AllProducts from './components/AllProducts'
+import SpecificProduct from './components/SpecificProduct'
 
 const App = () => {
   return (
     <div>
-      <AllProducts />
+      {/* <AllProducts /> */}
+      <SpecificProduct />
     </div>
   )
 }
