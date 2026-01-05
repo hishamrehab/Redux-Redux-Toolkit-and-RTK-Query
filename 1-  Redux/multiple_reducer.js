@@ -1,5 +1,6 @@
 const redux= require("redux");
 const createStore = redux.createStore;
+const combineReducers = redux.combineReducers;
 const ORDER_PIZZA = "ORDER_PIZZA"
 const ORDER_BURGER = "ORDER_BURGER"
 
@@ -19,23 +20,23 @@ function orderBurger() {
 }
 
 
-const initialState = {
+const initialStateForPizza = {
     pizzaBase : 100,  
+    
+}
+
+const initialStateForBurger = {
     burgerBuns: 200
 }
 
 
-const reducer = (state = initialState , action) => {
+
+const reducerPizza = (state = initialStateForPizza , action) => {
   switch(action.type) {
     case ORDER_PIZZA: 
     return {
         ...state,
         pizzaBase: state.pizzaBase - 1
-    }
-    case ORDER_BURGER: 
-    return {
-        ...state,
-        burgerBuns: state.burgerBuns -1
     }
     default:
     return state
@@ -43,7 +44,25 @@ const reducer = (state = initialState , action) => {
 }
 
 
-const store = createStore(reducer);
+
+const reducerBurger = (state = initialStateForBurger , action) => {
+  switch(action.type) {
+    case ORDER_PIZZA: 
+    return {
+        ...state,
+        burgerBuns: state.burgerBuns - 1
+    }
+    default:
+    return state
+  }
+}
+
+const rootReducer = combineReducers({
+        reducerBurger: reducerPizza,
+        reducerPizza: reducerBurger
+    }
+)
+const store = createStore(rootReducer);
 
 
 console.log("Initial State", store.getState());
