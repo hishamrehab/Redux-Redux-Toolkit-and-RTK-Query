@@ -1,6 +1,8 @@
 const redux= require("redux");
 const createStore = redux.createStore;
-
+const applyMiddleware = redux.applyMiddleware;
+const thunk = require("redux-thunk").thunk;
+const axios = require("axios");
 const FETCH_REQUEST = "FETCH_REQUEST";
 const FETCH_SUCCESS = "FETCH_SUCCESS";
 const FETCH_ERROR = "FETCH_ERROR";
@@ -62,8 +64,29 @@ const reducer = (state = initialState, action) => {
     }
 }
 
+// Thunk Action Creator
+const fetchProducts = () => {
+    return function(dispatch) {
+       dispatch(fetchRequest());
+     axios.get("https://fakestoreapi.com/products")
+     .then(res => {
+        // res.data
+        const products = res.data.map((product) => product.title);
+        console.log(products);
+        dispatch(fetchSuccess(products));
+      
+     }).catch(error => {
+        console.log(fetchError());
+     })
+   }
+}
 
 // Creating Store
- 
-const store = createStore(reducer);
+const store = createStore(reducer , applyMiddleware(thunk));
+store.subscribe(() => console.log(store.getState()));
+store.dispatch(fetchProducts());
+
+
+
+
 
