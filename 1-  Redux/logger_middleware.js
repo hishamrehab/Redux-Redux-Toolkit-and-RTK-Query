@@ -73,4 +73,4 @@ store.getState();
 store.dispatch(orderPizza());
 store.dispatch(orderPizza());
 store.dispatch(orderBurger());
-unsubscribe();
+unsubscribe(); 
