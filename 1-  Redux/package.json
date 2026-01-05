@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6"
   }
 }
