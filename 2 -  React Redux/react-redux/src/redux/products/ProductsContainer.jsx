@@ -12,7 +12,7 @@ const ProductsContainer = ({productsData, fetchProducts}) => {
     <div>
      {productsData.loading && <p>Loading...</p>}               
      {productsData.error && <p>{productsData.error}</p>}               
-     {productsData.products && <p>{productsData.products}</p>}               
+     {productsData.products && <p>{productsData.products.map(product => product.title))}</p>}               
     </div>
   )
 }
