@@ -1,33 +1,36 @@
 import React, { useEffect } from 'react'
 import { fetchProducts } from './ProductsActions'
-import { connect } from 'react-redux'
-const ProductsContainer = ({productsData, fetchProducts}) => {
+import { useDispatch, useSelector } from 'react-redux';
+
+const ProductsContainer = () => {
+const productsData =useSelector((state) => state.product);
+ const dispatch = useDispatch();
   useEffect(() => {
        fetchProducts();
-    console.log(productsData);
-  },[fetchProducts, productsData]);
+    dispatch(fetchProducts());
+  },[]);
   
   
   return (
     <div>
      {productsData.loading && <p>Loading...</p>}               
      {productsData.error && <p>{productsData.error}</p>}               
-     {productsData.products && <p>{productsData.products.map(product => product.title))}</p>}               
+     {productsData.products && <p>{productsData.products.map((product) => product.title)}</p>}               
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    productsData : state.product
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     productsData : state.product
+//   }
+// }
 
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchProducts: () =>  dispatch(fetchProducts())
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchProducts: () =>  dispatch(fetchProducts())
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
+export default ProductsContainer;
