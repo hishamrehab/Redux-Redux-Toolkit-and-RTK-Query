@@ -1,6 +1,6 @@
 import { createStore } from "redux";
-import pizzaReducer from "./pizza/PizzaReducers";
+import rootReducer from "./rootReducer";
 
-const store = createStore(pizzaReducer);
+const store = createStore(rootReducer);
 
 export default store;

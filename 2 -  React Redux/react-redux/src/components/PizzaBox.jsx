@@ -14,7 +14,7 @@ function PizzaBox(props) {
 
 const mapStateToProps=(state)=>{
     return{
-        pizzaBase:state.pizzaBase
+        pizzaBase:state.pizza.pizzaBase
     }
 };
 
